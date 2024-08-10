@@ -15,7 +15,7 @@ class BaseModel(models.Model):
 class Category(BaseModel):
     title = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(blank=True)
-    image = models.ImageField(upload_to='media/images/category/')
+    image = models.ImageField(upload_to='media/images/category/', null=True, blank=True)
 
     objects = models.Manager()
 
@@ -34,12 +34,13 @@ class Group(BaseModel):
     title = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(blank=True)
     image = models.ImageField(upload_to='media/images/group/')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='groups')
 
     objects = models.Manager()
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        if not self.slug:
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -52,7 +53,7 @@ class Product(BaseModel):
     description = models.TextField(null=True, blank=True)
     price = models.FloatField()
     discount = models.IntegerField(default=0)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='products')
     is_liked = models.ManyToManyField(User, related_name='liked_products', blank=True)
 
     objects = models.Manager()
