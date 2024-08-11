@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from olchauz.models import Category, Group, Product
+from olchauz.models import Category, Group, Product, Attribute
 
 
 class CategoryModelSerializer(serializers.ModelSerializer):
@@ -20,5 +20,11 @@ class GroupModelSerializer(serializers.ModelSerializer):
 class ProductModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
+        fields = '__all__'
+
+
+class AttributeModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attribute
         fields = '__all__'
 

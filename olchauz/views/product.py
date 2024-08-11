@@ -32,3 +32,35 @@ class ProductDetailApiView(generics.RetrieveUpdateDestroyAPIView):
         response.data = {'message': 'Product Successfully Deleted'}
         response.status_code = status.HTTP_200_OK
         return response
+
+
+"""PRODUCT ATTRIBUTE API VIEW"""
+
+
+class ProductAttributeCreateApiView(generics.ListCreateAPIView):
+    queryset = models.Attribute.objects.all()
+    serializer_class = serializers.AttributeModelSerializer
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        response.data = {'message': 'Product Attribute Successfully Created'}
+        response.status_code = status.HTTP_201_CREATED
+        return response
+
+
+class ProductAttributeDetailApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Attribute.objects.all()
+    serializer_class = serializers.AttributeModelSerializer
+    lookup_field = 'slug'
+
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)
+        response.data = {'message': 'Product Attribute Successfully Updated'}
+        response.status_code = status.HTTP_200_OK
+        return response
+
+    def destroy(self, request, *args, **kwargs):
+        response = super().destroy(request, *args, **kwargs)
+        response.data = {'message': 'Product Attribute Successfully Deleted'}
+        response.status_code = status.HTTP_200_OK
+        return response

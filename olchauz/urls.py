@@ -13,4 +13,8 @@ urlpatterns = [
     # Product URL
     path('product/', product.ProductCreateApiView.as_view(), name='product-list'),
     path('product/<slug:slug>/detail/', product.ProductDetailApiView.as_view(), name='product-detail'),
+
+    # Product Attribute URL
+    path('product-attribute/', product.ProductAttributeCreateApiView.as_view()),
+    path('product-attribute/<slug:slug>/detail/', product.ProductAttributeDetailApiView.as_view()),
 ]
