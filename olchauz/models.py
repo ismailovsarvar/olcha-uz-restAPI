@@ -33,7 +33,7 @@ class Category(BaseModel):
 class Group(BaseModel):
     title = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(blank=True)
-    image = models.ImageField(upload_to='media/images/group/')
+    image = models.ImageField(upload_to='media/images/group/', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='groups')
 
     objects = models.Manager()

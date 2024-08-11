@@ -1,9 +1,16 @@
-
 from django.urls import path
-from olchauz import views
+from olchauz.views import category, group, product
 
 urlpatterns = [
     # Category URL
-    path('category/', views.CategoryListApiView.as_view(), name='category-list'),
-    path('category/<slug:slug>/detail/', views.CategoryDetailApiView.as_view(), name='category-detail'),
+    path('category/', category.CategoryListCreateApiView.as_view(), name='category-list'),
+    path('category/<slug:slug>/detail/', category.CategoryDetailGenericApiView.as_view(), name='category-detail'),
+
+    # Group URL
+    path('group/', group.GroupCreateApiView.as_view(), name='group-list'),
+    path('group/<slug:slug>/detail/', group.GroupDetailApiView.as_view(), name='group-detail'),
+
+    # Product URL
+    path('product/', product.ProductCreateApiView.as_view(), name='product-list'),
+    path('product/<slug:slug>/detail/', product.ProductDetailApiView.as_view(), name='product-detail'),
 ]

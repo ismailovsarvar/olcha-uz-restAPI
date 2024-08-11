@@ -13,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    exclude = ('slug', )
+    prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'price', 'discount', 'created_at')
     search_fields = ('name', 'slug',)
     list_filter = ('price', 'created_at')
@@ -21,8 +21,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    exclude = ('slug',)
-    list_display = ('title', 'slug', 'created_at')
+    prepopulated_fields = {'slug': ('title',)}
+    list_display = ('title', 'category', 'created_at')
     search_fields = ('title', 'slug')
     list_filter = ('title', 'created_at')
 
