@@ -1,4 +1,6 @@
+from django.http import Http404
 from rest_framework import status, generics
+from rest_framework.exceptions import NotFound
 
 from olchauz import models, serializers
 
@@ -26,6 +28,12 @@ class ProductDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductModelSerializer
     lookup_field = 'slug'
+
+    def get_object(self):
+        try:
+            return super().get_object()
+        except Http404:
+            raise NotFound({'message': 'Product not found with the provided slug.'})
 
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)

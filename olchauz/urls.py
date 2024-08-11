@@ -8,6 +8,7 @@ urlpatterns = [
 
     # Group URL
     path('category/<slug:slug>/', group.GroupCreateApiView.as_view(), name='group-list'),
+    path('group/', group.GroupListApiView.as_view()),
     path('group/<slug:slug>/detail/', group.GroupDetailApiView.as_view(), name='group-detail'),
 
     # Product URL
