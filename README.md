@@ -16,4 +16,6 @@ Group Detail Api [Update and Delete]:
 Product Create Api:
 ![Product-Create-Api-–-Django-REST-framework](https://github.com/user-attachments/assets/2fa235e1-8a0a-4c53-ad7b-e77d5963ad9d)
 
+Product Attribute Create Api:
+![Product-Attribute-Create-Api-–-Django-REST-framework](https://github.com/user-attachments/assets/2c49d9f9-c286-4eb7-bd81-5ee6944b8ec0)
 
