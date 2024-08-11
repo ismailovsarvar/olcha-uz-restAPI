@@ -9,6 +9,12 @@ class ProductCreateApiView(generics.ListCreateAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductModelSerializer
 
+    def get_queryset(self):
+        category_slug = self.kwargs['category_slug']
+        group_slug = self.kwargs['group_slug']
+        queryset = models.Product.objects.filter(group__category__slug=category_slug, group__slug=group_slug)
+        return queryset
+
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
         response.data = {'message': 'Product Successfully Created'}

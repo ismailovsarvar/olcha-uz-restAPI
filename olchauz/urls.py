@@ -7,11 +7,11 @@ urlpatterns = [
     path('category/<slug:slug>/detail/', category.CategoryDetailGenericApiView.as_view(), name='category-detail'),
 
     # Group URL
-    path('group/', group.GroupCreateApiView.as_view(), name='group-list'),
+    path('category/<slug:slug>/', group.GroupCreateApiView.as_view(), name='group-list'),
     path('group/<slug:slug>/detail/', group.GroupDetailApiView.as_view(), name='group-detail'),
 
     # Product URL
-    path('product/', product.ProductCreateApiView.as_view(), name='product-list'),
+    path('category/<slug:category_slug>/<slug:group_slug>/', product.ProductCreateApiView.as_view(), name='product-list'),
     path('product/<slug:slug>/detail/', product.ProductDetailApiView.as_view(), name='product-detail'),
 
     # Product Attribute URL
