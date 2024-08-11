@@ -1,6 +1,15 @@
 from django.contrib import admin
 
-from olchauz.models import Product, Category, Group, Comment, Image
+from olchauz.models import (
+    Product,
+    Category,
+    Group,
+    Comment,
+    Image,
+    Key,
+    Value,
+    Attribute
+)
 
 
 @admin.register(Category)
@@ -35,3 +44,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Image)
+
+admin.site.register(Key)
+admin.site.register(Value)
+admin.site.register(Attribute)

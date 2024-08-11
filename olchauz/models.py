@@ -99,14 +99,23 @@ class Comment(BaseModel):
 
 
 class Key(BaseModel):
-    name = models.CharField(max_length=70)
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
 
 
 class Value(BaseModel):
-    name = models.CharField(max_length=250)
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
 
 
 class Attribute(models.Model):
     key = models.ForeignKey(Key, on_delete=models.CASCADE)
     value = models.ForeignKey(Value, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.product.name
