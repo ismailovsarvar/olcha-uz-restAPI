@@ -1,6 +1,8 @@
 from django.http import Http404
 from rest_framework import status, generics
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.exceptions import NotFound
+from rest_framework.permissions import IsAuthenticated
 
 from olchauz import models, serializers
 
@@ -10,6 +12,9 @@ from olchauz import models, serializers
 class ProductCreateApiView(generics.ListCreateAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductModelSerializer
+
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         category_slug = self.kwargs['category_slug']
