@@ -1,10 +1,11 @@
 from django.http import Http404
-from rest_framework import status, generics
+from rest_framework import status, generics, viewsets
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticated
 
 from olchauz import models, serializers
+from olchauz.permissions import CustomPermission
 
 """PRODUCT GENERIC API VIEW"""
 
@@ -83,3 +84,12 @@ class ProductAttributeDetailApiView(generics.RetrieveUpdateDestroyAPIView):
         response.data = {'message': 'Product Attribute Successfully Deleted'}
         response.status_code = status.HTTP_200_OK
         return response
+
+
+"""Permissions"""
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductModelSerializer
+    permission_classes = [CustomPermission]
