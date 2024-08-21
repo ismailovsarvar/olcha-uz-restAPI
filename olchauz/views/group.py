@@ -22,14 +22,24 @@ class GroupCreateApiView(generics.ListCreateAPIView):
 
 class GroupListApiView(APIView):
 
+    # def get(self, request):
+    #     groups = models.Group.objects.all()
+    #     serializer = serializers.GroupModelSerializer(groups, many=True, context={'request': request})
+    #     return Response(serializer.data, status=status.HTTP_200_OK)
+
+    """Optimization"""
     def get(self, request):
-        groups = models.Group.objects.all()
+        groups = models.Group.objects.prefetch_related('products').select_related('category').all()
         serializer = serializers.GroupModelSerializer(groups, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class GroupDetailApiView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Group.objects.all()
+
+    # Optimization
+    queryset = models.Group.objects.select_related('category').prefetch_related('products').all()
+
+    # queryset = models.Group.objects.all()
     serializer_class = serializers.GroupModelSerializer
     lookup_field = 'slug'
 

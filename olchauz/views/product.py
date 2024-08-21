@@ -20,7 +20,11 @@ class ProductCreateApiView(generics.ListCreateAPIView):
     def get_queryset(self):
         category_slug = self.kwargs['category_slug']
         group_slug = self.kwargs['group_slug']
-        queryset = models.Product.objects.filter(group__category__slug=category_slug, group__slug=group_slug)
+        # queryset = models.Product.objects.filter(group__category__slug=category_slug, group__slug=group_slug)
+
+        # Optimization
+        queryset = models.Product.objects.filter(group__category__slug=category_slug,
+                                                 group__slug=group_slug).select_related('group', 'group__category')
         return queryset
 
     def create(self, request, *args, **kwargs):
@@ -31,7 +35,11 @@ class ProductCreateApiView(generics.ListCreateAPIView):
 
 
 class ProductDetailApiView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Product.objects.all()
+
+    # Optimization
+    queryset = models.Product.objects.select_related('group', 'group__category').all()
+
+    # queryset = models.Product.objects.all()
     serializer_class = serializers.ProductModelSerializer
     lookup_field = 'slug'
 
@@ -90,6 +98,9 @@ class ProductAttributeDetailApiView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = models.Product.objects.all()
+    # Optimization
+    queryset = models.Product.objects.select_related('group', 'group__category').prefetch_related('is_liked')
+
+    # queryset = models.Product.objects.all()
     serializer_class = serializers.ProductModelSerializer
     permission_classes = [CustomPermission]
