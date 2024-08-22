@@ -19,3 +19,11 @@ Product Create Api:
 Product Attribute Create Api:
 ![Product-Attribute-Create-Api-–-Django-REST-framework](https://github.com/user-attachments/assets/2c49d9f9-c286-4eb7-bd81-5ee6944b8ec0)
 
+Product Detail API:
+![product-detail-api](https://github.com/user-attachments/assets/59c25c82-a153-4425-b139-d93b77b05c68)
+
+User TOKEN:
+![Screenshot_1](https://github.com/user-attachments/assets/f95c1b87-f336-4aa3-a50f-0ec363120b44)
+
+
+
