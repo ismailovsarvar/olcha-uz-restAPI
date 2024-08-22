@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'olchauz.apps.OlchauzConfig',
-    'auth.apps.AuthConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -71,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'root.urls'
@@ -152,8 +152,3 @@ INTERNAL_IPS = [
     # ...
 ]
 
-MIDDLEWARE = [
-    # ...
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    # ...
-]

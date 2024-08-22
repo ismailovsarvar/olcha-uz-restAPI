@@ -38,13 +38,20 @@ class GroupAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('message', 'rating', 'created_at')
+    list_display = ('message', 'product', 'rating', 'created_at')
     search_fields = ('message',)
     list_filter = ('rating', 'created_at')
 
 
-admin.site.register(Image)
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('image', 'product', 'is_primary')
+
 
 admin.site.register(Key)
 admin.site.register(Value)
-admin.site.register(Attribute)
+
+
+@admin.register(Attribute)
+class AttributeAdmin(admin.ModelAdmin):
+    list_display = ('product', 'key', 'value')

@@ -1,5 +1,5 @@
 from django.urls import path
-from olchauz.views import category, group, product
+from olchauz.views import category, group, product, auth
 
 urlpatterns = [
     # Category URL
@@ -18,4 +18,9 @@ urlpatterns = [
     # Product Attribute URL
     path('product-attribute/', product.ProductAttributeCreateApiView.as_view()),
     path('product-attribute/<slug:slug>/detail/', product.ProductAttributeDetailApiView.as_view()),
+
+    # Login View
+    path('login/', auth.LoginApiView.as_view()),
+    path('logout/', auth.LogoutApiView.as_view()),
+    path('register/', auth.RegisterApiView.as_view())
 ]

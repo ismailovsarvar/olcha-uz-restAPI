@@ -96,6 +96,7 @@ class Comment(BaseModel):
     rating = models.IntegerField(choices=Rating.choices, default=Rating.One.value)
     file = models.FileField(null=True, blank=True, upload_to='comments/')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
 
 
 class Key(BaseModel):
@@ -115,7 +116,7 @@ class Value(BaseModel):
 class Attribute(models.Model):
     key = models.ForeignKey(Key, on_delete=models.CASCADE)
     value = models.ForeignKey(Value, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='attributes')
 
     def __str__(self):
         return self.product.name
